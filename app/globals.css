@@ -1,0 +1,149 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #0a0a0a;
+  --color-s1: #111111;
+  --color-s2: #171717;
+  --color-s3: #1d1d1d;
+  --color-s4: #242424;
+  --color-line: rgba(255, 255, 255, 0.07);
+  --color-line2: rgba(255, 255, 255, 0.12);
+  --color-tx: #ffffff;
+  --color-tx2: #a1a1a1;
+  --color-tx3: #6e6e6e;
+  --color-paper: #f2f1ec;
+  --color-ink: #121212;
+  /* TAWD primary blue (#064B93, active #0D61BB) for fills and primary actions; a lighter tint of it for text
+     and lines, which must stay legible on the dark ground */
+  --color-brand: #064b93;
+  --color-brand2: #0d61bb;
+  --color-acc: #5c9de8;
+  --color-acc2: #2f6fb5;
+  --color-ok: #7cc39a;
+  --color-warn: #d6a85c;
+  --color-bad: #e07f74;
+  --color-info: #8ea8c3;
+  --color-lilac: #b7a6d9;
+  --font-sans: "IBM Plex Sans Arabic", "Manrope Variable", system-ui, sans-serif;
+  --font-latin: "Manrope Variable", "IBM Plex Sans Arabic", system-ui, sans-serif;
+  --radius-card: 18px;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  background: var(--color-bg);
+  color: var(--color-tx);
+}
+
+body {
+  font-family: var(--font-sans);
+  font-feature-settings: "tnum" 1;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgba(92, 157, 232, 0.3);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #2a2a2a transparent;
+}
+
+.latin {
+  font-family: var(--font-latin);
+  letter-spacing: -0.01em;
+}
+
+/* numbers inside Arabic text keep their own direction without moving the block */
+.num {
+  unicode-bidi: isolate;
+  font-variant-numeric: tabular-nums;
+}
+
+.card {
+  background: var(--color-s1);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+}
+
+.card-2 {
+  background: var(--color-s2);
+  border: 1px solid var(--color-line);
+  border-radius: 14px;
+}
+
+.hairline {
+  border-color: var(--color-line);
+}
+
+.grid-bg {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+.pulse-dot {
+  animation: pulse-dot 1.6s ease-in-out infinite;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; translate: 0 6px; }
+  to { opacity: 1; translate: 0 0; }
+}
+/* translate (not transform) and no fill-mode, so fixed-position dialogs inside are never re-anchored */
+.fade-up {
+  animation: fade-up 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes sweep {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+.processing-bar {
+  background: linear-gradient(90deg, transparent, rgba(92, 157, 232, 0.55), transparent);
+  background-size: 200% 100%;
+  animation: sweep 1.2s linear infinite;
+}
+
+@keyframes flow {
+  to { stroke-dashoffset: -24; }
+}
+.flow-line {
+  stroke-dasharray: 4 8;
+  animation: flow 1s linear infinite;
+}
+
+@keyframes ecg {
+  to { stroke-dashoffset: 0; }
+}
+
+[data-presentation="true"] .dev-only {
+  display: none !important;
+}
+
+.recharts-surface:focus,
+.recharts-wrapper:focus,
+.recharts-sector:focus {
+  outline: none;
+}
+.recharts-tooltip-wrapper {
+  z-index: 20;
+}
+
+input[type="range"] {
+  accent-color: var(--color-acc);
+}
+
+@media print {
+  aside {
+    display: none;
+  }
+}
