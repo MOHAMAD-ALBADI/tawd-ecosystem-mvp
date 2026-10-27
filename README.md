@@ -1,5 +1,8 @@
 # TAWD | طود — Connected Clinic Ecosystem MVP
 
+**Live demo:** https://mohamad-albadi.github.io/tawd-ecosystem-mvp/ · start with the live journey at
+https://mohamad-albadi.github.io/tawd-ecosystem-mvp/demo/ (data stays in your browser; the «ضبط» button resets it).
+
 A working, local-first demonstration of TAWD: one connected system for private clinics that combines
 **TAWD Grow** (acquisition and retention), **TAWD Operate** (appointments, queue, billing, attendance,
 cancellation recovery), and **TAWD Care** (patient app, connected wearable, doctor follow-up). All three are
