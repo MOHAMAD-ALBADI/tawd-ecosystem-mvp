@@ -1,3 +1,4 @@
+import { asset } from "@/lib/asset";
 import type { Metadata, Viewport } from "next";
 import "@fontsource-variable/manrope";
 import "@fontsource/ibm-plex-sans-arabic/300.css";
@@ -11,7 +12,7 @@ import { Providers } from "@/components/providers";
 export const metadata: Metadata = {
   title: "طود | TAWD — منظومة العيادة الذكية",
   description: "TAWD connects clinic growth, operations and continuous care through one intelligent orchestration layer. Demonstration build with synthetic data.",
-  icons: { icon: "/brand/tawd-mark-white.png" },
+  icons: { icon: asset("/brand/tawd-mark-white.png") },
 };
 
 export const viewport: Viewport = { themeColor: "#0a0a0a", width: "device-width", initialScale: 1 };

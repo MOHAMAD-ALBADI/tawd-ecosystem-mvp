@@ -8,3 +8,5 @@ next-env.d.ts
 .env*.local
 .vercel
 npm-debug.log*
+.next-pages/
+.api-parked/

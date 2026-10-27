@@ -1,4 +1,5 @@
 "use client";
+import { asset } from "@/lib/asset";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState, type ReactNode } from "react";
@@ -75,7 +76,7 @@ function Sidebar({ path }: { path: string }) {
     <div className="flex h-full flex-col">
       <Link href="/" className="flex items-center gap-3 px-5 pb-5 pt-6">
         {/* official TAWD logo, white variant, used as supplied */}
-        <img src="/brand/tawd-logo-white.png" alt="TAWD طود" className="h-[26px] w-auto" />
+        <img src={asset("/brand/tawd-logo-white.png")} alt="TAWD طود" className="h-[26px] w-auto" />
       </Link>
       <div className="mx-4 mb-3 rounded-xl border hairline bg-s1 px-3 py-2.5">
         <div className="truncate text-[12.5px] font-medium">{data.clinic.name}</div>
@@ -136,7 +137,7 @@ function TopBar({ path, onMenu }: { path: string; onMenu: () => void }) {
       )}
       <header className="sticky top-0 z-40 flex h-16 items-center gap-3 border-b hairline bg-bg/85 px-4 backdrop-blur md:px-8">
         <button onClick={onMenu} aria-label="القائمة" className="grid h-9 w-9 place-items-center rounded-lg border border-line2 text-tx2 lg:hidden"><Menu size={18} /></button>
-        <img src="/brand/tawd-mark-white.png" alt="" className="h-5 w-auto lg:hidden" />
+        <img src={asset("/brand/tawd-mark-white.png")} alt="" className="h-5 w-auto lg:hidden" />
         <div className="min-w-0 flex-1">
           <div className="truncate text-[14px] font-medium">{title}</div>
           <div className="hidden text-[11.5px] text-tx3 sm:block">{fmtLongDate(new Date())} · {data.clinic.name}</div>

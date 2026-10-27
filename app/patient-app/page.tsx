@@ -1,4 +1,5 @@
 "use client";
+import { asset } from "@/lib/asset";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import {
@@ -63,7 +64,7 @@ function Welcome({ onEnter }: { onEnter: () => void }) {
   return (
     <div className="relative flex flex-1 flex-col justify-between overflow-y-auto px-6 pb-10 pt-14">
       <div className="pointer-events-none absolute -right-24 top-24 h-72 w-72 rounded-full bg-acc/[0.09] blur-3xl" />
-      <img src="/brand/tawd-logo-white.png" alt="TAWD طود" className="relative h-7 w-auto self-start" />
+      <img src={asset("/brand/tawd-logo-white.png")} alt="TAWD طود" className="relative h-7 w-auto self-start" />
       <div className="relative">
         <div className="text-[13px] text-acc">تطبيق المريض</div>
         <h1 className="mt-2 text-[34px] font-semibold leading-[1.25]">عيادتك ورعايتك<br />في مكان واحد.</h1>
@@ -429,7 +430,7 @@ function AlertsTab() {
 function DesktopInfo() {
   return (
     <div className="sticky top-8 ml-auto max-w-[320px] pt-6">
-      <img src="/brand/tawd-logo-white.png" alt="TAWD طود" className="h-6 w-auto" />
+      <img src={asset("/brand/tawd-logo-white.png")} alt="TAWD طود" className="h-6 w-auto" />
       <h1 className="mt-6 text-[26px] font-semibold leading-snug">تطبيق المريض</h1>
       <p className="mt-3 text-[13.5px] leading-7 text-tx2">نفس البيانات التي تراها العيادة: الحجز من هنا يظهر فورًا في جدول العيادة ويصل إلى وكيل تأكيد الحضور، والإلغاء يُطلق وكيل الاسترداد.</p>
       <div className="mt-5 space-y-2 text-[12.5px] text-tx3">

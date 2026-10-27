@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { asset } from "@/lib/asset";
 import { useEffect, useMemo, useState } from "react";
 import { Check, Lock, Send, ShieldCheck, Sparkles, X } from "lucide-react";
 import type { AgentId, AgentTask, Channel, TaskStatus } from "@/types";
@@ -130,7 +131,7 @@ function SuraConsole() {
   const [ai, setAi] = useState<boolean | null>(null);
   const [polishing, setPolishing] = useState(false);
   useEffect(() => {
-    fetch("/api/sura").then((r) => r.json()).then((j: { enabled?: boolean }) => setAi(!!j.enabled)).catch(() => setAi(false));
+    fetch(asset("/api/sura")).then((r) => r.json()).then((j: { enabled?: boolean }) => setAi(!!j.enabled)).catch(() => setAi(false));
   }, []);
   const thread = d.messages.filter((m) => m.threadId === sent);
   const q = d.inquiries.find((x) => x.id === sent);
@@ -144,7 +145,7 @@ function SuraConsole() {
       if (!reply) return;
       setPolishing(true);
       try {
-        const r = await fetch("/api/sura", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ patient: text, reply: reply.text }) });
+        const r = await fetch(asset("/api/sura"), { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ patient: text, reply: reply.text }) });
         const j = (await r.json()) as { text?: string };
         if (j.text) act.setMessageText(reply.id, j.text);
       } finally {

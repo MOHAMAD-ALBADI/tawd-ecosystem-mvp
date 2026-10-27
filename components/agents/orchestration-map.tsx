@@ -1,4 +1,5 @@
 "use client";
+import { asset } from "@/lib/asset";
 import type { AgentId } from "@/types";
 import { useData } from "@/lib/store";
 import { agentStats } from "@/lib/engine/kpis";
@@ -49,7 +50,7 @@ export function OrchestrationMap() {
           })}
         </svg>
         <div className="absolute left-1/2 top-1/2 w-[230px] -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-paper/20 bg-[#141414] p-4 text-center shadow-2xl">
-          <div className="mx-auto grid h-11 w-11 place-items-center rounded-xl bg-paper"><img src="/brand/tawd-mark-white.png" alt="" className="h-5 w-auto invert" /></div>
+          <div className="mx-auto grid h-11 w-11 place-items-center rounded-xl bg-paper"><img src={asset("/brand/tawd-mark-white.png")} alt="" className="h-5 w-auto invert" /></div>
           <div className="latin mt-2 text-[14px] font-semibold">TAWD Intelligence</div>
           <div className="mt-1 text-[11.5px] leading-5 text-tx3">موجّه الأحداث · فرض الصلاحيات · منع التكرار · سجل التدقيق</div>
           <div className="mt-2 flex justify-center gap-3 text-[11px] text-tx2">
