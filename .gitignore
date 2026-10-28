@@ -10,3 +10,6 @@ next-env.d.ts
 npm-debug.log*
 .next-pages/
 .api-parked/
+
+.vercel
+.env*

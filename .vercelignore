@@ -1,0 +1,11 @@
+# never upload local secrets; the server key is set in the Vercel dashboard
+.env
+.env.*
+!.env.example
+node_modules
+.next
+.next-pages
+out
+screenshots
+tests
+.api-parked
