@@ -75,12 +75,12 @@ export default function GrowthPage() {
 
       <div className="mt-3 grid gap-3 xl:grid-cols-3">
         <Card className="xl:col-span-2" title="الاستفسارات والحجوزات يوميًا">
-          <AreaTrend data={trend} height={230} series={[{ key: "inquiries", name: "استفسارات", color: "#8ea8c3" }, { key: "booked", name: "حجوزات", color: "#5c9de8" }]} />
+          <AreaTrend data={trend} height={230} series={[{ key: "inquiries", name: "استفسارات", color: "#8ea8c3" }, { key: "booked", name: "حجوزات", color: "#2e7bd6" }]} />
         </Card>
         <Card title="مصادر العملاء المحتملين" subtitle="حسب القناة">
-          <Donut data={sources} height={180} colors={["#5c9de8", "#8ea8c3", "#d6a85c", "#b7a6d9", "#d08a80"]} center={{ value: String(k.inquiries), label: "استفسار" }} />
+          <Donut data={sources} height={180} colors={["#2e7bd6", "#8ea8c3", "#d6a85c", "#b7a6d9", "#d08a80"]} center={{ value: String(k.inquiries), label: "استفسار" }} />
           <div className="mt-3 grid grid-cols-2 gap-1.5 text-[12px]">
-            {sources.map((s, i) => <div key={s.name} className="flex items-center gap-2"><span className="h-2 w-2 rounded-full" style={{ background: ["#5c9de8", "#8ea8c3", "#d6a85c", "#b7a6d9", "#d08a80"][i % 5] }} /><span className="text-tx2">{s.name}</span><span className="latin mr-auto text-tx3">{s.value}</span></div>)}
+            {sources.map((s, i) => <div key={s.name} className="flex items-center gap-2"><span className="h-2 w-2 rounded-full" style={{ background: ["#2e7bd6", "#8ea8c3", "#d6a85c", "#b7a6d9", "#d08a80"][i % 5] }} /><span className="text-tx2">{s.name}</span><span className="latin mr-auto text-tx3">{s.value}</span></div>)}
           </div>
         </Card>
       </div>

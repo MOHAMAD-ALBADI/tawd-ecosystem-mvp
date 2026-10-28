@@ -62,7 +62,7 @@ export function NewAppointmentDialog({ open, onClose, preset }: { open: boolean;
             {slots.length ? slots.map((s) => <button key={s} onClick={() => setSlot(s)} className={cls("latin h-9 rounded-lg border text-[12.5px]", slot === s ? "border-acc bg-brand text-white" : "hairline bg-s2")}>{hhmm(s)}</button>) : <span className="col-span-6 text-[12.5px] text-tx3">لا أوقات متاحة في هذا اليوم</span>}
           </div>
         </Field>
-        <label className="flex items-center gap-2 text-[13px] text-tx2"><input type="checkbox" checked={confirmed} onChange={(e) => setConfirmed(e.target.checked)} className="accent-[#5c9de8]" /> أكّد المريض الحضور هاتفيًا (لا حاجة لطلب تأكيد)</label>
+        <label className="flex items-center gap-2 text-[13px] text-tx2"><input type="checkbox" checked={confirmed} onChange={(e) => setConfirmed(e.target.checked)} className="accent-[#2e7bd6]" /> أكّد المريض الحضور هاتفيًا (لا حاجة لطلب تأكيد)</label>
       </div>
     </Dialog>
   );

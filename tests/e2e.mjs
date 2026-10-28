@@ -40,7 +40,7 @@ await check("seed loads with coherent data", async () => {
   assert(keys.size === live.length, "double booking in seed");
 });
 
-const ROUTES = [["/", "طود منظومة ذكية"], ["/dashboard", "لوحة القيادة التنفيذية"], ["/operations", "العمليات الذكية"], ["/agents", "سُرى وستة وكلاء"], ["/appointments", "المواعيد"], ["/patients", "المرضى"], ["/growth", "النمو والتسويق"], ["/care", "الرعاية المتصلة"], ["/doctor", "لوحة متابعة الطبيب"], ["/demo", "رحلة تشغيل ذكية متكاملة"], ["/patient-app", "تطبيق المريض"]];
+const ROUTES = [["/", "لوحة القيادة التنفيذية"], ["/dashboard", "لوحة القيادة التنفيذية"], ["/operations", "العمليات الذكية"], ["/agents", "سُرى وستة وكلاء"], ["/appointments", "المواعيد"], ["/patients", "المرضى"], ["/growth", "النمو والتسويق"], ["/care", "الرعاية المتصلة"], ["/doctor", "لوحة متابعة الطبيب"], ["/demo", "رحلة تشغيل ذكية متكاملة"], ["/patient-app", "تطبيق المريض"]];
 await check("all 11 routes render without errors", async () => {
   for (const [path, text] of ROUTES) {
     const before = errors.length;

@@ -197,7 +197,7 @@ export function Empty({ icon, text, action }: { icon?: ReactNode; text: string; 
   );
 }
 
-export function Sparkline({ values, color = "#5c9de8", height = 34, width = 120 }: { values: number[]; color?: string; height?: number; width?: number }) {
+export function Sparkline({ values, color = "#2e7bd6", height = 34, width = 120 }: { values: number[]; color?: string; height?: number; width?: number }) {
   if (values.length < 2) return <svg width={width} height={height} />;
   const min = Math.min(...values);
   const max = Math.max(...values);

@@ -145,7 +145,7 @@ export function Lines({ data, series, height = 200, xKey = "label", domain, refL
 }
 
 /* stage-by-stage funnel drawn in HTML: widths are proportional, labels stay Arabic and right-aligned */
-export function Funnel({ data, color = "#5c9de8" }: { data: { stage: string; value: number }[]; color?: string }) {
+export function Funnel({ data, color = "#2e7bd6" }: { data: { stage: string; value: number }[]; color?: string }) {
   const max = Math.max(1, ...data.map((d) => d.value));
   return (
     <div className="space-y-3">

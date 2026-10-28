@@ -83,7 +83,7 @@ function PatientRow({ p, active, onClick, tone }: { p: Patient; active: boolean;
   const d = useData();
   const rs = d.readings.filter((r) => r.patientId === p.id).slice(-24);
   const last = rs.at(-1);
-  const color = tone === "bad" ? "#e07f74" : tone === "warn" ? "#d6a85c" : "#5c9de8";
+  const color = tone === "bad" ? "#e07f74" : tone === "warn" ? "#d6a85c" : "#2e7bd6";
   return (
     <button onClick={onClick} className={cls("flex w-full items-center gap-3 rounded-xl border px-3 py-2.5 text-right transition-colors", active ? "border-white/20 bg-white/[0.05]" : "hairline bg-s2 hover:border-white/12")}>
       <div className="min-w-0 flex-1">

@@ -53,7 +53,7 @@ export default function DashboardPage() {
       <div className="mt-3 grid gap-3 xl:grid-cols-3">
         <Card className="xl:col-span-2" title="اتجاه المواعيد اليومي" subtitle="محجوز · مكتمل · ملغى — الخط المتقطع يفصل الماضي عن الجدول القادم" tag={<DemoTag />}>
           <AreaTrend data={trend} todayLabel="اليوم" height={250} series={[
-            { key: "booked", name: "محجوز", color: "#5c9de8" },
+            { key: "booked", name: "محجوز", color: "#2e7bd6" },
             { key: "completed", name: "مكتمل", color: "#8ea8c3" },
             { key: "cancelled", name: "ملغى", color: "#e07f74" },
           ]} />

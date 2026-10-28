@@ -13,6 +13,7 @@ import { cls, num } from "@/lib/format";
 import { AgentAvatar, Badge, Button, Card, Field, PageHeader, SimTag, Tabs, TaskBadge, inputCls } from "@/components/ui";
 import { AuditTable } from "@/components/audit";
 import { OrchestrationMap } from "@/components/agents/orchestration-map";
+import { SuraChat } from "@/components/agent/sura-chat";
 
 const PRESETS = ["السلام عليكم، أريد موعد مع طبيب القلب.", "كم سعر تنظيف الأسنان؟", "عندي حساسية في الجلد وأبغى موعد", "أبي موعد متابعة سكري"];
 
@@ -94,7 +95,7 @@ export default function AgentsPage() {
           </div>
         </section>
 
-        <SuraConsole />
+        <section className="card overflow-hidden xl:col-span-5"><SuraChat mode="staff" className="h-[560px]" /></section>
       </div>
 
       <Card className="mt-3" title="خريطة التنسيق" subtitle="TAWD Intelligence يستقبل الأحداث، يطبّق الصلاحيات والقواعد، ويوجّه كل حدث لوكيل واحد — الخطوط المتحركة = نشاط خلال آخر 15 دقيقة">

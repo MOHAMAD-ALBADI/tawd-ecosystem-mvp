@@ -65,7 +65,7 @@ export const AGENTS: Record<AgentId, AgentDef> = {
     responsibilities: ["فهم الاستفسارات وتحديد النية", "الرد من معلومات العيادة المعتمدة", "تحديد التخصص المطلوب", "توجيه المسار إلى الوكيل المختص"],
     permissions: ["conversation.reply", "patient.create_lead", "inquiry.classify", "workflow.route"],
     approvals: [],
-    color: "#5c9de8",
+    color: "#2e7bd6",
   },
   scheduling: {
     id: "scheduling",

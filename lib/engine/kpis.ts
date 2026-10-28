@@ -104,7 +104,7 @@ export function funnel(s: Data) {
 export function revenueBreakdown(s: Data) {
   const k = kpis(s);
   return [
-    { name: "محصّل", value: k.revenueRealized, tone: "#5c9de8" },
+    { name: "محصّل", value: k.revenueRealized, tone: "#2e7bd6" },
     { name: "مستحق", value: k.revenueDue, tone: "#8EA8C3" },
     { name: "مجدول مؤكد", value: k.revenueScheduled - k.revenuePending, tone: "#D9D9D6" },
     { name: "بانتظار التأكيد", value: k.revenuePending, tone: "#D6A85C" },

@@ -10,7 +10,9 @@ import { ago, fmtTime, hhmm } from "@/lib/time";
 import { cls } from "@/lib/format";
 import { AgentAvatar, Badge, Button, Card, Field, PageHeader, SimTag, inputCls } from "@/components/ui";
 import { Bars, Lines } from "@/components/charts";
-import { BandVisual } from "@/components/care/band";
+import dynamic from "next/dynamic";
+
+const Band3D = dynamic(() => import("@/components/care/band3d"), { ssr: false, loading: () => <div className="h-full w-full" /> });
 import { AuditTable } from "@/components/audit";
 
 export default function CarePage() {
@@ -63,8 +65,9 @@ export default function CarePage() {
 
       <div className="grid gap-3 xl:grid-cols-12">
         <Card className="xl:col-span-4" title="السوار" subtitle={cur.dv.model} tag={<SimTag label="نموذج مفهوم" />}>
-          <div className="grid place-items-center rounded-2xl bg-[#0c0c0c] py-4">
-            <BandVisual reading={last} connected={cur.dv.status === "connected"} history={rs.map((r) => r.hr)} flagged={!!last?.flagged?.length} />
+          <div className="relative h-[340px] overflow-hidden rounded-2xl bg-[radial-gradient(ellipse_at_center,#0d1b33_0%,#0a0a0a_72%)]">
+            <Band3D bpm={last?.hr ?? 72} alert={!!last?.flagged?.length} connected={cur.dv.status === "connected"} />
+            <div className="pointer-events-none absolute right-3 top-3 rounded-lg bg-black/50 px-2.5 py-1.5 text-right backdrop-blur"><div className="latin text-[22px] font-semibold leading-none">{last?.hr ?? "—"}<span className="mr-1 text-[11px] text-tx3">bpm</span></div><div className="mt-1 text-[10.5px] text-tx3">قراءة حية · اسحب للتدوير</div></div>
           </div>
           <div className="mt-4 grid grid-cols-2 gap-2 text-[12.5px]">
             <Info icon={cur.dv.status === "connected" ? <Bluetooth size={14} className="text-ok" /> : <BluetoothOff size={14} className="text-tx3" />} label="الاتصال" value={cur.dv.status === "connected" ? "متصل" : "غير متصل"} />
@@ -133,7 +136,7 @@ export default function CarePage() {
               <Lines data={chart} height={150} domain={[35.8, 38.6]} series={[{ key: "temp", name: "الحرارة", color: "#d6a85c" }]} refLines={[{ y: th.tempHigh, label: `عتبة توضيحية ${th.tempHigh}°` }]} />
             </Card>
             <Card title="النشاط البدني" subtitle="خطوات لكل فترة قياس">
-              <Bars data={chart.slice(-20)} height={150} series={[{ key: "steps", name: "خطوات", color: "#5c9de8" }]} />
+              <Bars data={chart.slice(-20)} height={150} series={[{ key: "steps", name: "خطوات", color: "#2e7bd6" }]} />
             </Card>
           </div>
         </div>

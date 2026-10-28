@@ -19,7 +19,7 @@ export function BandVisual({ reading, connected, history, flagged }: { reading?:
       {[24, 40, 56, 300, 316, 332].map((y) => <line key={y} x1="92" x2="148" y1={y} y2={y} stroke="rgba(255,255,255,0.05)" />)}
       <rect x="44" y="96" width="152" height="168" rx="42" fill="#222222" stroke="rgba(255,255,255,0.16)" />
       <rect x="196" y="160" width="6" height="34" rx="3" fill="#2c2c2c" />
-      <rect x="58" y="110" width="124" height="140" rx="32" fill="#0a0c0b" stroke="rgba(92, 157, 232,0.18)" />
+      <rect x="58" y="110" width="124" height="140" rx="32" fill="#0a0c0b" stroke="rgba(46, 123, 214,0.18)" />
       {connected && reading ? (
         <>
           <text x="120" y="140" textAnchor="middle" fill="#6e6e6e" fontSize="9" fontFamily="Manrope Variable, sans-serif" letterSpacing="2">TAWD</text>
@@ -27,7 +27,7 @@ export function BandVisual({ reading, connected, history, flagged }: { reading?:
           <text x="120" y="193" textAnchor="middle" fill="#8a8a8a" fontSize="9" fontFamily="Manrope Variable, sans-serif">BPM · SpO₂ {reading.spo2}%</text>
           {bars.map((v, i) => {
             const h = 4 + ((v - min) / Math.max(1, max - min)) * 18;
-            return <rect key={i} x={76 + i * 6.4} y={232 - h} width="3.6" height={h} rx="1.5" fill={flagged && i === bars.length - 1 ? "#e07f74" : "#5c9de8"} opacity={0.35 + (i / bars.length) * 0.65} />;
+            return <rect key={i} x={76 + i * 6.4} y={232 - h} width="3.6" height={h} rx="1.5" fill={flagged && i === bars.length - 1 ? "#e07f74" : "#2e7bd6"} opacity={0.35 + (i / bars.length) * 0.65} />;
           })}
         </>
       ) : (

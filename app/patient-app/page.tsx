@@ -3,7 +3,7 @@ import { asset } from "@/lib/asset";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import {
-  Bell, CalendarDays, CalendarPlus, Check, ChevronLeft, Clock, Droplets, HeartPulse, Home, MapPin, Thermometer, Footprints, Watch, X, ShieldCheck, Users, ArrowRight, LayoutDashboard,
+  Bell, CalendarDays, CalendarPlus, Check, ChevronLeft, Clock, Droplets, HeartPulse, Home, MapPin, Thermometer, Footprints, Watch, X, ShieldCheck, Users, ArrowRight, LayoutDashboard, MessagesSquare, Sparkles,
 } from "lucide-react";
 import type { Appointment, Specialty } from "@/types";
 import { useData, useStore } from "@/lib/store";
@@ -15,8 +15,12 @@ import { addDays, ago, fmtDay, fmtDayTime, fmtTime, hhmm, sameDay, startOfDay } 
 import { cls } from "@/lib/format";
 import { ApptBadge } from "@/components/ui";
 import { Lines } from "@/components/charts";
+import { SuraChat } from "@/components/agent/sura-chat";
+import dynamic from "next/dynamic";
 
-type Tab = "home" | "appts" | "book" | "health" | "alerts";
+const Band3D = dynamic(() => import("@/components/care/band3d"), { ssr: false, loading: () => <div className="h-full w-full rounded-3xl bg-white/[0.02]" /> });
+
+type Tab = "home" | "appts" | "book" | "health" | "alerts" | "sura";
 
 export default function PatientApp() {
   const [welcomed, setWelcomed] = useState<boolean | null>(null);
@@ -30,19 +34,23 @@ export default function PatientApp() {
   if (welcomed === null) return null;
 
   return (
-    <div className="min-h-screen bg-[#060606] lg:grid lg:grid-cols-[1fr_auto_1fr] lg:gap-10 lg:px-10 lg:py-8">
+    <div className="min-h-screen bg-[#060606] lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-center lg:gap-10 lg:px-10 lg:py-5">
       <aside className="hidden lg:block"><DesktopInfo /></aside>
-      <div className="relative mx-auto flex h-dvh w-full max-w-[430px] flex-col overflow-hidden bg-bg lg:h-[860px] lg:w-[400px] lg:rounded-[34px] lg:border lg:border-line2 lg:shadow-[0_30px_80px_rgba(0,0,0,0.6)]">
+      <div className="relative mx-auto flex h-dvh w-full max-w-[430px] flex-col overflow-hidden bg-bg lg:h-[min(860px,calc(100dvh-40px))] lg:w-[400px] lg:rounded-[34px] lg:border lg:border-line2 lg:shadow-[0_30px_80px_rgba(0,0,0,0.6)]">
         {!welcomed ? <Welcome onEnter={enter} /> : (
           <>
             <AppHeader onBell={() => setTab("alerts")} />
-            <div className="flex-1 overflow-y-auto px-4 pb-28 pt-2">
-              {tab === "home" && <HomeTab go={setTab} />}
-              {tab === "appts" && <ApptsTab go={setTab} />}
-              {tab === "book" && <BookTab go={setTab} />}
-              {tab === "health" && <HealthTab />}
-              {tab === "alerts" && <AlertsTab />}
-            </div>
+            {tab === "sura" ? (
+              <SuraChat mode="patient" dense className="flex-1 pb-[78px]" />
+            ) : (
+              <div className="flex-1 overflow-y-auto px-4 pb-28 pt-2">
+                {tab === "home" && <HomeTab go={setTab} />}
+                {tab === "appts" && <ApptsTab go={setTab} />}
+                {tab === "book" && <BookTab go={setTab} />}
+                {tab === "health" && <HealthTab />}
+                {tab === "alerts" && <AlertsTab />}
+              </div>
+            )}
             <BottomNav tab={tab} go={setTab} />
           </>
         )}
@@ -110,13 +118,13 @@ function AppHeader({ onBell }: { onBell: () => void }) {
 }
 
 function BottomNav({ tab, go }: { tab: Tab; go: (t: Tab) => void }) {
-  const items: [Tab, string, typeof Home][] = [["home", "الرئيسية", Home], ["appts", "مواعيدي", CalendarDays], ["book", "احجز", CalendarPlus], ["health", "صحتي", HeartPulse], ["alerts", "التنبيهات", Bell]];
+  const items: [Tab, string, typeof Home][] = [["home", "الرئيسية", Home], ["appts", "مواعيدي", CalendarDays], ["sura", "سُرى", MessagesSquare], ["health", "صحتي", HeartPulse], ["alerts", "التنبيهات", Bell]];
   return (
     <nav className="absolute inset-x-0 bottom-0 z-20 border-t hairline bg-[#0d0d0d]/95 px-2 pb-5 pt-2 backdrop-blur lg:pb-4">
       <div className="grid grid-cols-5">
         {items.map(([id, label, I]) => (
           <button key={id} onClick={() => go(id)} className={cls("flex flex-col items-center gap-1 py-1 text-[10.5px]", tab === id ? "text-acc" : "text-tx3")}>
-            {id === "book" ? <span className={cls("-mt-5 grid h-12 w-12 place-items-center rounded-2xl shadow-lg", tab === id ? "bg-brand text-white" : "bg-paper text-ink")}><I size={20} /></span> : <I size={19} />}
+            {id === "sura" ? <span className={cls("-mt-5 grid h-12 w-12 place-items-center rounded-2xl shadow-lg shadow-brand/30", tab === id ? "bg-brand2 text-white" : "bg-brand text-white")}><I size={20} /></span> : <I size={19} />}
             {label}
           </button>
         ))}
@@ -139,6 +147,17 @@ function HomeTab({ go }: { go: (t: Tab) => void }) {
         <button onClick={() => go("book")} className="w-full rounded-3xl border border-dashed border-line2 p-5 text-center text-[13.5px] text-tx2">لا مواعيد قادمة — احجز موعدًا</button>
       )}
       {next && today && next.id !== today.id && <NextCard a={upcoming.find((a) => a.id !== today.id)!} compact />}
+
+      <div className="grid grid-cols-2 gap-2.5">
+        <button onClick={() => go("sura")} className="flex items-center gap-2.5 rounded-2xl bg-brand px-4 py-3.5 text-right text-white">
+          <Sparkles size={18} />
+          <span><span className="block text-[13.5px] font-semibold">اسأل سُرى</span><span className="block text-[11px] text-white/70">حجز وأسئلة بالمحادثة</span></span>
+        </button>
+        <button onClick={() => go("book")} className="flex items-center gap-2.5 rounded-2xl border hairline bg-s1 px-4 py-3.5 text-right">
+          <CalendarPlus size={18} className="text-acc" />
+          <span><span className="block text-[13.5px] font-semibold">احجز موعدًا</span><span className="block text-[11px] text-tx3">اختر التخصص والوقت</span></span>
+        </button>
+      </div>
 
       <button onClick={() => go("health")} className="block w-full rounded-3xl border hairline bg-s1 p-4 text-right">
         <div className="flex items-center justify-between">
@@ -384,6 +403,10 @@ function HealthTab() {
   return (
     <div className="space-y-3">
       <h2 className="text-[20px] font-semibold">صحتي</h2>
+      <div className="relative -mx-1 h-[250px] overflow-hidden rounded-3xl border hairline bg-[radial-gradient(ellipse_at_center,#0d1b33_0%,#0a0a0a_70%)]">
+        <Band3D bpm={last?.hr ?? 72} alert={!!last?.flagged?.length} connected={dv?.status === "connected"} />
+        <div className="pointer-events-none absolute bottom-3 right-4 text-[11px] text-tx3">اسحب لتدوير السوار · النبض يتحرك بقراءتك الحية</div>
+      </div>
       <div className="rounded-3xl border hairline bg-s1 p-4">
         <div className="flex items-center justify-between text-[12.5px]"><span className="flex items-center gap-2"><Watch size={15} className="text-acc" />{dv?.model}</span><span className="latin text-tx3">{dv?.battery}%</span></div>
         <div className="mt-3 grid grid-cols-2 gap-2">
